@@ -1,0 +1,109 @@
+# vscode
+.vscode
+*/.vscode
+
+# data
+data/*
+*/data/*
+*/*/data/*
+*.db
+*/*.db
+*/*/*.db
+
+# test files
+test.*
+*/test.*
+*/*/test.*
+
+# output
+*.zip
+*/.zip
+*/*/.zip
+*.pth
+*/*.pth
+*/*/*.pth
+*.pkl
+*/*.pkl
+*/*/*.pkl
+*.html
+*/*.html
+*/*/*.html
+ckpt/*
+*/ckpt/*
+*/*/ckpt/*
+assets/*
+*/assets/*
+*/*/assets/*
+*.svg
+*/*.svg
+*/*/*.svg
+*.png
+*/*.png
+*/*/*.png
+*.jpg
+*/*.jpg
+*/*/*.jpg
+*.jpeg
+*/*.jpeg
+*/*/*.jpeg
+*.webp
+*/*.webp
+*/*/*.webp
+*.gif
+*/*.gif
+*/*/*.gif
+*.mp4
+*/*.mp4
+*/*/*.mp4
+
+# tensorboard
+*.tfevents*
+*/*.tfevents*
+*/*/*.tfevents*
+
+# temporary files
+*.ipynb
+*/*.ipynb
+*/*/*.ipynb
+
+# cache
+__pycache__
+*/__pycache__
+*/*/__pycache__
+
+# Tex intermediate files
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.pdf
+*.synctex.gz
+*.toc
+*.xdv
+*.nav
+*.snm
+*.run.xml
+
+# tmp
+tmp/*
+*/tmp/*
+*/*/tmp/*
+
+# gitkeep
+!.gitkeep
+!*/.gitkeep
+!*/*/.gitkeep
+
+# keep text dependencies
+!assets_pdfs/*
+!*/assets_pdfs/*
+!*/*/assets_pdfs/*
+!*/*/*/assets_pdfs/*
+
+# keep large file
+!assets/ve
+!assets/ve/cifar10_nscnpp_cont/ckpt/epoch_1999.pth
+!data/CIFAR10.npz
