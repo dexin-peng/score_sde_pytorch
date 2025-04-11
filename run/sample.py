@@ -4,7 +4,6 @@ from PIL import Image
 from tqdm import tqdm
 import torch
 from torch_ema import ExponentialMovingAverage
-from pytorch_fid.fid_score import calculate_fid_given_paths
 from torchvision.utils import make_grid
 from torchvision.transforms import ToPILImage
 
@@ -115,6 +114,7 @@ class Sampler:
         if self.config.sampling.eval: self._eval_fid()
 
     def _eval_fid(self):
+        from pytorch_fid.fid_score import calculate_fid_given_paths
         paths = [self.config.io.out_raw_sample_path, self.config.io.in_dataset_stat_path]
         self.logger.info(f"Calculating FID Score for {paths}")
         fid_value = calculate_fid_given_paths(paths, batch_size=48, device=self.config.sampling.device, dims=2048)
