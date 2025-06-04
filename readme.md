@@ -31,15 +31,15 @@ This repository is a rewrite of [Yang Song's score_sde_pytorch](https://github.c
 
 2. Start training:
    ```bash
-   python3 main.py --config cifar10_nscnpp_cont --mode train
+   python3 main.py --config cifar10_ncsnpp_cont --mode train
    ```
 
 3. Or generate samples:
    ```bash
    git lfs pull
-   # Pull large files, one is the pre-trained checkpoint `assets/ve/cifar10_nscnpp_cont/ckpt/epoch_1999.pth`
+   # Pull large files, one is the pre-trained checkpoint `assets/ve/cifar10_ncsnpp_cont/ckpt/epoch_1999.pth`
    # Another is the stats of CIFAR-10 `data/CIFAR10.npz`
-   python3 main.py --config cifar10_nscnpp_cont --mode sample
+   python3 main.py --config cifar10_ncsnpp_cont --mode sample
    ```
 
 ### Method 2: Using Docker
@@ -76,7 +76,7 @@ The following command line parameters are available:
 
 `--config`: (Required) Configuration name to use.
 
-- Currently only `cifar10_nscnpp_cont` rewritten
+- Currently only `cifar10_ncsnpp_cont` rewritten
 
 `--mode`: (Required) Either `train` to train the model or `sample` to generate samples.
 
@@ -90,24 +90,24 @@ The following command line parameters are available:
 
 1. To generate samples from the model:
    ```bash
-   python3 main.py --config cifar10_nscnpp_cont --mode sample
+   python3 main.py --config cifar10_ncsnpp_cont --mode sample
    ```
-   Uses the configuration `cifar10_nscnpp_cont` and latest checkpoint to generate samples.
+   Uses the configuration `cifar10_ncsnpp_cont` and latest checkpoint to generate samples.
 
 2. To sample from a specific training epoch:
    ```bash
-   python3 main.py --config cifar10_nscnpp_cont --mode sample --sampling_from_epoch 1999
+   python3 main.py --config cifar10_ncsnpp_cont --mode sample --sampling_from_epoch 1999
    ```
    Using the model weights from epoch 1999, allowing you to evaluate the model's performance at that specific point in training.
 
 3. To train the model from scratch:
    ```bash
-   python3 main.py --config cifar10_nscnpp_cont --mode train --training_from_scratch
+   python3 main.py --config cifar10_ncsnpp_cont --mode train --training_from_scratch
    ```
 
 4. Continue training the model:
    ```bash
-   python3 main.py --config cifar10_nscnpp_cont --mode train
+   python3 main.py --config cifar10_ncsnpp_cont --mode train
    ```
 
 5. All settings are at `config` directory

@@ -1,2 +1,2 @@
-assets/ve/cifar10_nscnpp_cont/ckpt/epoch_1999.pth filter=lfs diff=lfs merge=lfs -text
+assets/ve/cifar10_ncsnpp_cont/ckpt/epoch_1999.pth filter=lfs diff=lfs merge=lfs -text
 data/CIFAR10.npz filter=lfs diff=lfs merge=lfs -text

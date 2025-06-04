@@ -105,5 +105,5 @@ tmp/*
 
 # keep large file
 !assets/ve
-!assets/ve/cifar10_nscnpp_cont/ckpt/epoch_1999.pth
+!assets/ve/cifar10_ncsnpp_cont/ckpt/epoch_1999.pth
 !data/CIFAR10.npz

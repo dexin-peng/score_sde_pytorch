@@ -3,8 +3,8 @@ from config.base_cifar10 import BaseCIFAR10Config
 from config.dynamic_io import DynamicIOConfig
 from selector.config_selector import register_config
 
-@register_config(name='cifar10_nscnpp_cont')
-class CIFAR10NSCNPPContConfig(BaseCIFAR10Config):
+@register_config(name='cifar10_ncsnpp_cont')
+class CIFAR10NCSNPPContConfig(BaseCIFAR10Config):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -53,7 +53,7 @@ class IOConfig(DynamicIOConfig):
     def in_raw_dataset_path(self): return os.path.join("data", "raw", "CIFAR10")
 
     @property
-    def out_asset_suffix(self): return os.path.join("ve", "cifar10_nscnpp_cont")
+    def out_asset_suffix(self): return os.path.join("ve", "cifar10_ncsnpp_cont")
 
     @property
     def use_tensorboard(self): return True

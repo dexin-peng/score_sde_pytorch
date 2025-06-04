@@ -64,7 +64,7 @@ if __name__ == "__main__":
     from run.sde import VESDE
     from model.optimizer import AdamOptimizer
     from model.ncsnpp import NCSNpp
-    from config.ve.cifar10_nscnpp_cont import CIFAR10NSCNPPContConfig
+    from config.ve.cifar10_ncsnpp_cont import CIFAR10NCSNPPContConfig
     from model.predictors import ReverseDiffusionPredictor
     from model.correctors import NoneCorrector
     main()
