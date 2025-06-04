@@ -26,4 +26,4 @@ class OptimizerFN:
                 g['lr'] = self.config.optim.lr * torch.minimum(torch.tensor(epoch) / self.config.optim.warmup, torch.tensor(1.0))
         if self.config.optim.grad_clip >= 0:
             torch.nn.utils.clip_grad_norm_(model_parameters, max_norm=self.config.optim.grad_clip)
-            optimizer.step()
+        optimizer.step()

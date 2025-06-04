@@ -7,7 +7,7 @@ This repository is a rewrite of [Yang Song's score_sde_pytorch](https://github.c
 - Improved dependency management
 - Compatible with PyTorch 2.6.0+CUDA 12.6
 - Object-oriented style coding
-- FID score of 2.388 (nearly the same as the [paper](https://arxiv.org/abs/2011.13456)) on CIFAR-10 using NSCN++ with continuous VESDE
+- FID score of 2.388 (nearly the same as the [paper](https://arxiv.org/abs/2011.13456)) on CIFAR-10 using NCSN++ with continuous VESDE
 - Docker support for easy deployment and reproducibility
 - Easy to extend to other datasets, neural nets, SDEs
 - Fixed the wrong prior sampling of the reverse SDE for CIFAR-10, continuous VESDE
