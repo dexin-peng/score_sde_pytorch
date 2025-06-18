@@ -132,19 +132,19 @@ class DynamicIOConfig(ml_collections.ConfigDict):
     def generated_sample_png_file_path(self, image_count):
         if self.latest_generated_sample_num is None:
             return None
-        return os.path.join(self.out_raw_sample_path, f"{self.out_sample_filename_prefix}_{image_count:05d}.jpg")
+        return os.path.join(self.out_raw_sample_path, f"{self.out_sample_filename_prefix}_{image_count:05d}.png")
     
     def sample_pdf_file_path(self, step):
         return os.path.join(self.out_sample_path, f"{self.out_sample_filename_prefix}_{step}.pdf")
 
     @staticmethod
     def get_sample_num(filename):
-        match = re.search(r'_(\d+)\.jpg', filename)
+        match = re.search(r'_(\d+)\.png', filename)
         return int(match.group(1)) if match else 0
 
     @property
     def latest_generated_sample_num(self):
-        pattern = os.path.join(self.out_raw_sample_path, f'{self.out_sample_filename_prefix}_*.jpg')
+        pattern = os.path.join(self.out_raw_sample_path, f'{self.out_sample_filename_prefix}_*.png')
         sample_files = glob.glob(pattern)
         if not sample_files:
             return 0
@@ -156,5 +156,5 @@ class DynamicIOConfig(ml_collections.ConfigDict):
     def latest_generated_sample_file_path(self):
         if self.latest_generated_sample_num is None:
             return None
-        return os.path.join(self.out_raw_sample_path, f'{self.out_sample_filename_prefix}_{self.latest_generated_sample_num}.jpg')
+        return os.path.join(self.out_raw_sample_path, f'{self.out_sample_filename_prefix}_{self.latest_generated_sample_num}.png')
 
