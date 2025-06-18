@@ -94,7 +94,7 @@ class SDE(abc.ABC):
         rg = g(rt)  =>  drg = dg(rt)
 
         when k increases, time approaches 0,
-        drt=-dt<0 in the reverse SDE, but W_{- \delta t} =_D W_{\delta t} by the property of Brownian motion
+        drt=-dt<0 in the reverse SDE, but W_{- delta t} =_D W_{delta t} by the property of Brownian motion
         """
         df, dg = forward_self.discretize(rx, rt)
         drf = df - dg ** 2 * self.score_fn(model, rx, rt)

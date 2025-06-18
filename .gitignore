@@ -1,3 +1,11 @@
+# raw images
+*.pt
+*/*.pt
+*/*/*.pt
+
+# HPC misc
+gpujob.sh
+
 # vscode
 .vscode
 */.vscode

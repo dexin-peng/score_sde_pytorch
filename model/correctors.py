@@ -47,4 +47,4 @@ class NoneCorrector(Corrector):
   def __init__(self, sde, score_fn, snr, n_steps):
     pass
   def run(self, model, x, t):
-    return x
+    return x, x

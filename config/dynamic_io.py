@@ -117,7 +117,7 @@ class DynamicIOConfig(ml_collections.ConfigDict):
             return self.latest_checkpoint_epoch
 
 
-    @cached_property
+    @property
     def sampling_ckpt_file_path(self):
         if self.sampling_from_epoch is not None:
             return os.path.join(self.out_ckpt_path, f'{self.out_ckpt_filename_prefix}_{self.sampling_from_epoch}.pth')
