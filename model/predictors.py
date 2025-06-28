@@ -23,11 +23,11 @@ class EulerMaruyamaPredictor(Predictor):
   def __init__(self, sde, score_fn):
     super().__init__(sde, score_fn)
 
-  def run(self, x, t):
+  def run(self, model, x, t):
     dt = -1. / self.rsde.discretization_steps
-    drift, diffusion = self.rsde.reverse_drift_and_diffusion(x, t)
+    drift, diffusion = self.rsde.reverse_drift_and_diffusion(model, x, t)
     x_mean = x + drift * dt
-    x = x_mean + diffusion[:, None, None, None] * torch.sqrt(-dt)
+    x = x_mean + diffusion * torch.sqrt(torch.tensor(-dt, device=x.device)) * torch.randn_like(x)
     return x, x_mean
 
 
