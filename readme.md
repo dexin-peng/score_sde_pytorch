@@ -25,6 +25,7 @@ This repository is a rewrite of [Yang Song's score_sde_pytorch](https://github.c
 
 1. Clone this repository:
    ```bash
+   export GIT_LFS_SKIP_SMUDGE=1
    git clone https://github.com/dexin-peng/score_sde_pytorch.git
    # If you have not installed `git large file storage (LFS) service`, You may get the error `Downloading assets/ve/cifar10_ncsnpp_cont/ckpt/epoch_1999.pth (1.3 GB) Error downloading object:` 
    # Ignore it. If you want to do the sampling, you can install git lfs after `git clone`, and at that time run `git lfs pull`
@@ -50,6 +51,7 @@ A Dockerfile is provided for separated system and CUDA management:
 
 1. Build the Docker image:
    ```bash
+   export GIT_LFS_SKIP_SMUDGE=1
    git clone https://github.com/dexin-peng/score_sde_pytorch.git
    cd score_sde_pytorch
    docker build -t score_sde_pytorch .
