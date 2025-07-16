@@ -19,6 +19,40 @@ This repository is a rewrite of [Yang Song's score_sde_pytorch](https://github.c
 - Use Inception-v3 (not v1) to calculate FID
 - No Likelihood computation
 
+## Q&A Collection
+
+### `d` in `./run/sde.py`
+Be careful to distinguish between **discretize** and **differentiate**. For example,
+```python
+# rf = f(rt) - g(rt) ** 2 * score(y, rt)  =>  drf = df(rt) - dg(rt) ** 2 * score(y, rt)
+```
+The `d` in `drf` is discretize.
+
+### Can't clone repo
+Clone hangs at `Updating files`
+```bash
+Cloning into 'score_sde_pytorch'...
+...
+Updating files: 100% (46/46), done.
+# appears to hang here
+```
+This usually means git is downloading large checkpoint files tracked by Git LFS.
+
+You may run `export GIT_LFS_SKIP_SMUDGE=1` before cloning to skip downloading LFS objects when cloning. When you need the large files, run `git lfs pull`
+
+Large LFS‑tracked objects are listed in `.gitattributes`.
+
+### Not using Docker
+Tested software versions
+```python
+Python 3.11.11
+>>> torch.__version__
+'2.6.0+cu126'
+>>> torch.backends.cudnn.version()
+90501
+```
+For other packages, run `pip install -r requirements.txt`
+
 ## Getting Started
 
 ### Method 1: Clone and Run
@@ -127,6 +161,8 @@ The following command line parameters are available:
 
 - But empirically, the 0 mean implementation also achieves FID 2.465 with 50k to 50k settings.
 
-## Computational Power
+## Acknowledgments
+
+- The original repo [score_sde_pytorch](https://github.com/yang-song/score_sde_pytorch)
 
 - Computational Power Supported by HPC of HKUST(GZ)

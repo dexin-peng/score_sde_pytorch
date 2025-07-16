@@ -27,7 +27,7 @@ class Sampler:
 
     def sample(self):
         self.iter_num = 0
-        self.logger.info(f"Sampling total {self.total_samples} samples; Already generated {self.saved_samples} samples; Remaining samples: {self.remaining_samples}")
+        self.logger.info(f"Total samples to generate: {self.total_samples}; Already generated {self.saved_samples}; Remaining: {self.remaining_samples}")
         with self.ema.average_parameters():
             while self.remaining_samples > 0:
                 self._sample()
@@ -81,7 +81,7 @@ class Sampler:
             img = Image.fromarray(img_array.numpy())
             img_path = self.config.io.generated_sample_png_file_path(self.saved_samples + 1)
             img.save(img_path)
-        self.logger.info(f"Converted {self.samples.shape[0]} raw samples to {self.config.io.out_raw_sample_path}")
+        self.logger.info(f"Saved {self.samples.shape[0]} samples as PNG images in folder: {self.config.io.out_raw_sample_path}")
 
     def load_checkpoint(self):
         self.logger.info(f"Loading checkpoint from {self.config.io.sampling_ckpt_file_path}")
@@ -109,13 +109,13 @@ class Sampler:
             grid_image.save(visualize_samples_file_path, format='PDF')
 
     def _update_stat(self):
-        self.logger.info(f"Sampling total {self.total_samples} samples; Already generated {self.saved_samples} samples; Remaining samples: {self.remaining_samples}")
+        self.logger.info(f"Total samples to generate: {self.total_samples}; Already generated {self.saved_samples}; Remaining: {self.remaining_samples}")
         self.iter_num += 1
         if self.config.sampling.eval: self._eval_fid()
 
     def _eval_fid(self):
         from pytorch_fid.fid_score import calculate_fid_given_paths
         paths = [self.config.io.out_raw_sample_path, self.config.io.in_dataset_stat_path]
-        self.logger.info(f"Calculating FID Score for {paths}")
+        self.logger.info(f"Calculating FID score using images from: {paths}")
         fid_value = calculate_fid_given_paths(paths, batch_size=48, device=self.config.sampling.device, dims=2048)
         self.logger.info(f"FID Score: {fid_value}")

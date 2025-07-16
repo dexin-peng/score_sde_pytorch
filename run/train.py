@@ -98,7 +98,7 @@ class Trainer:
             self._save_state(self.epoch)
             self.saved = True
         self.best_evaluate_loss = min(self.best_evaluate_loss, self.evaluate_loss)
-        self.logger.info(f"Epoch {self.epoch}/{self.end_epoch - self.start_epoch}, Evaluate Loss: {self.evaluate_loss:.4f}, Best Evaluate Loss: {self.best_evaluate_loss:.4f}")
+        self.logger.info(f"Epoch {self.epoch}/{self.end_epoch - self.start_epoch}, Eval Loss: {self.evaluate_loss:.4f}, Best Eval Loss: {self.best_evaluate_loss:.4f}")
 
     @cached_property
     def train_loader(self):

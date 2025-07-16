@@ -11,11 +11,11 @@ from utils.logger import Logger
 def main():
     parser = argparse.ArgumentParser(description='Train or sample from diffusion model')
     parser.add_argument('--config', type=str, required=True, choices=_CONFIGS.keys(), help='Configuration name')
-    parser.add_argument('--mode', type=str, required=True, choices=['train', 'sample'], help='To train model or generate samples')
+    parser.add_argument('--mode', type=str, required=True, choices=['train', 'sample'], help='Train the model or generate samples')
 
     parser.add_argument('--user_logging_level', type=str, required=False, default='info', choices=['debug', 'info', 'warning', 'error'], help='Set logging level (debug, info, warning, error)')
-    parser.add_argument('--training_from_scratch', action='store_true', default=False, required=False, help='To train model from scratch or continue training')
-    parser.add_argument('--sampling_from_epoch', type=int, required=False, default=None, help='To sample from model with which training epoch, default is the latest training epoch')
+    parser.add_argument('--training_from_scratch', action='store_true', default=False, required=False, help='Train from scratch instead of resuming training')
+    parser.add_argument('--sampling_from_epoch', type=int, required=False, default=None, help='Epoch number to load for sampling (default: latest checkpoint)')
 
     args = parser.parse_args()
 
