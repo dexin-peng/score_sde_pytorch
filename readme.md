@@ -19,7 +19,7 @@ This repository is a rewrite of [Yang Song's score_sde_pytorch](https://github.c
 - Use Inception-v3 (not v1) to calculate FID
 - No Likelihood computation
 
-## Q&A Collection
+## Quick Trouble Shoot
 
 ### `d` in `./run/sde.py`
 Be careful to distinguish between **discretize** and **differentiate**. For example,
@@ -52,6 +52,19 @@ Python 3.11.11
 90501
 ```
 For other packages, run `pip install -r requirements.txt`
+
+### Getting far larger FID score
+
+Few samples gives low FID score; a more detailed "Images Generated" versus "FID Score" curve is in issue #7 (see [this comment](https://github.com/dexin-peng/score_sde_pytorch/issues/7#issuecomment-3197768965)).
+
+
+| Images Generated | Expected FID Score |
+|------------------|-----------|
+| 200              | 100       |
+| 1000             | 32        |
+| 3000             | 11        |
+| 50000            | 2.46       |
+
 
 ## Getting Started
 
@@ -151,6 +164,8 @@ The following command line parameters are available:
 
 - Followed the `corrector-predictor` sequence, instead of `predictor-corrector`
 
+- For more detailed discussion, see part 4, 5, 6, 7 of [issue #7 comment](https://github.com/dexin-peng/score_sde_pytorch/issues/7#issuecomment-3197768965).
+
 ## The Prior Distribution
 
 - [Yang Song's score_sde_pytorch](https://github.com/yang-song/score_sde_pytorch) use 0 as the mean of the prior distribution. [Check the original code](https://github.com/yang-song/score_sde_pytorch/blob/cb1f359f4aadf0ff9a5e122fe8fffc9451fd6e44/sde_lib.py#L238).
@@ -160,6 +175,22 @@ The following command line parameters are available:
 - If set `config.data.centered=True`, the prior is wrong as well. r,g,b channels mean is `(0.4914*2-1, 0.4822*2-1, 0.4465*2-1)` instead of `(0,0,0)`
 
 - But empirically, the 0 mean implementation also achieves FID 2.465 with 50k to 50k settings.
+
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature/amazing-feature`
+3. Commit changes: `git commit -m 'Add amazing feature'`
+4. Push to branch: `git push origin feature/amazing-feature`
+5. Open a Pull Request
+
+### Development Guidelines
+
+- Follow existing code style
+- Add comments for complicated codes
+- Images could be generated and the FID score is nearly the same as what was claimed in the [original paper](https://arxiv.org/abs/2011.13456)
+- Update documentation for new features
 
 ## Acknowledgments
 
