@@ -19,53 +19,6 @@ This repository is a rewrite of [Yang Song's score_sde_pytorch](https://github.c
 - Use Inception-v3 (not v1) to calculate FID
 - No Likelihood computation
 
-## Quick Trouble Shoot
-
-### `d` in `./run/sde.py`
-Be careful to distinguish between **discretize** and **differentiate**. For example,
-```python
-# rf = f(rt) - g(rt) ** 2 * score(y, rt)  =>  drf = df(rt) - dg(rt) ** 2 * score(y, rt)
-```
-The `d` in `drf` is discretize.
-
-### Can't clone repo
-Clone hangs at `Updating files`
-```bash
-Cloning into 'score_sde_pytorch'...
-...
-Updating files: 100% (46/46), done.
-# appears to hang here
-```
-This usually means git is downloading large checkpoint files tracked by Git LFS.
-
-You may run `export GIT_LFS_SKIP_SMUDGE=1` before cloning to skip downloading LFS objects when cloning. When you need the large files, run `git lfs pull`
-
-Large LFS‑tracked objects are listed in `.gitattributes`.
-
-### Not using Docker
-Tested software versions
-```python
-Python 3.11.11
->>> torch.__version__
-'2.6.0+cu126'
->>> torch.backends.cudnn.version()
-90501
-```
-For other packages, run `pip install -r requirements.txt`
-
-### Getting far larger FID score
-
-Few samples gives low FID score; a more detailed "Images Generated" versus "FID Score" curve is in issue #7 (see [this comment](https://github.com/dexin-peng/score_sde_pytorch/issues/7#issuecomment-3197768965)).
-
-
-| Images Generated | Expected FID Score |
-|------------------|-----------|
-| 200              | 100       |
-| 1000             | 32        |
-| 3000             | 11        |
-| 50000            | 2.46       |
-
-
 ## Getting Started
 
 ### Method 1: Clone and Run
@@ -74,8 +27,10 @@ Few samples gives low FID score; a more detailed "Images Generated" versus "FID 
    ```bash
    export GIT_LFS_SKIP_SMUDGE=1
    git clone https://github.com/dexin-peng/score_sde_pytorch.git
-   # If you have not installed `git large file storage (LFS) service`, You may get the error `Downloading assets/ve/cifar10_ncsnpp_cont/ckpt/epoch_1999.pth (1.3 GB) Error downloading object:` 
-   # Ignore it. If you want to do the sampling, you can install git lfs after `git clone`, and at that time run `git lfs pull`
+   # The `export GIT_LFS_SKIP_SMUDGE=1` prevents downloading large files tracked by Git LFS. Otherwise you may hang on `Updating files: 100% (46/46), done.` of git clone. When you need the pre-trained checkpoint or the stats of CIFAR-10, run `git lfs pull`
+   # If you have not installed `git large file storage (LFS) service`, you may get error
+   # If you do not want to do the training, you should install git lfs and pull the pre-trained checkpoint `assets/ve/cifar10_ncsnpp_cont/ckpt/epoch_1999.pth`
+   # If you want to evaluate the FID score, you should install git lfs and pull the stats of CIFAR-10 `data/CIFAR10.npz`, or calculate the stats with `pytorch_fid` and save it
    cd score_sde_pytorch
    pip install -r requirements.txt
    ```
@@ -99,6 +54,10 @@ A Dockerfile is provided for separated system and CUDA management:
 1. Build the Docker image:
    ```bash
    export GIT_LFS_SKIP_SMUDGE=1
+   # The `export GIT_LFS_SKIP_SMUDGE=1` prevents downloading large files tracked by Git LFS. Otherwise you may hang on `Updating files: 100% (46/46), done.` of git clone. When you need the pre-trained checkpoint or the stats of CIFAR-10, run `git lfs pull`
+   # If you have not installed `git large file storage (LFS) service`, you may get error
+   # If you do not want to do the training, you should install git lfs and pull the pre-trained checkpoint `assets/ve/cifar10_ncsnpp_cont/ckpt/epoch_1999.pth`
+   # If you want to evaluate the FID score, you should install git lfs and pull the stats of CIFAR-10 `data/CIFAR10.npz`, or calculate the stats with `pytorch_fid` and save it
    git clone https://github.com/dexin-peng/score_sde_pytorch.git
    cd score_sde_pytorch
    docker build -t score_sde_pytorch .
@@ -176,6 +135,26 @@ The following command line parameters are available:
 
 - But empirically, the 0 mean implementation also achieves FID 2.465 with 50k to 50k settings.
 
+## Quick Trouble Shoot
+
+### `d` in `./run/sde.py`
+Be careful to distinguish between **discretize** and **differentiate**. For example,
+```python
+# rf = f(rt) - g(rt) ** 2 * score(y, rt)  =>  drf = df(rt) - dg(rt) ** 2 * score(y, rt)
+```
+The `d` in `drf` is discretize.
+
+### Getting far larger FID score
+
+Few samples gives large FID score; a more detailed "Images Generated" versus "FID Score" curve is in issue #7 (see [this comment](https://github.com/dexin-peng/score_sde_pytorch/issues/7#issuecomment-3197768965)).
+
+
+| Images Generated | Expected FID Score |
+|------------------|-----------|
+| 200              | 100       |
+| 1000             | 32        |
+| 3000             | 11        |
+| 50000            | 2.46       |
 
 ## Contributing
 
@@ -189,11 +168,11 @@ The following command line parameters are available:
 
 - Follow existing code style
 - Add comments for complicated codes
-- Images could be generated and the FID score is nearly the same as what was claimed in the [original paper](https://arxiv.org/abs/2011.13456)
+- Images could be generated and the FID score is good
 - Update documentation for new features
 
 ## Acknowledgments
 
 - The original repo [score_sde_pytorch](https://github.com/yang-song/score_sde_pytorch)
 
-- Computational Power Supported by HPC of HKUST(GZ)
+- Computing Resource Supported by HPC-III of HKUST(GZ)
